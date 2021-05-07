@@ -1,0 +1,15 @@
+name: Run ESLint on Push
+
+on: [push]
+
+jobs:
+  build:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm ci
+      - run: npm run lint

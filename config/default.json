@@ -1,0 +1,11 @@
+{
+  "token": "YOUR_TOKEN",
+  "prefix": "!",
+  "eval": ["USER_ID"],
+  "channels": {
+    "content": {
+      "id": "CHANNEL_ID",
+      "timeout": "MS_LIKE_TIME"
+    }
+  }
+}

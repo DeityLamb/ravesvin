@@ -12,6 +12,7 @@ function updateTimeout(...args) {
 module.exports.run = (client, message) => {
   if(message.channel.id !== config.id) return;
   if(message.attachments.size) return;
+  if(message.embeds.length) return;
   if(message.content.startsWith('.')) return;
 
   messages.push(message);

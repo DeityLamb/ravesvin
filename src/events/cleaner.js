@@ -9,6 +9,15 @@ function updateTimeout(...args) {
   timeout = setTimeout(...args);
 }
 
+function chunk(array, size) {
+  const arr = [];
+  for(let i = 0; i < array.length; i += size) {
+    const arrChunk = array.slice(i, size + i); 
+    arr.push(arrChunk);
+  }
+  return arr;
+}
+
 module.exports.run = (client, message) => {
   if(message.channel.id !== config.id) return;
   if(message.attachments.size) return;
@@ -22,7 +31,9 @@ module.exports.run = (client, message) => {
     if(!message.deletable) return;
     if(message.deleted) return;
     
-    message.channel.bulkDelete(messages);
+    for(const msgs of chunk(messages, 100)) {
+      message.channel.bulkDelete(msgs).catch(console.error);
+    }
   }, ms(config.timeout));
 }
 
